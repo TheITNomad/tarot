@@ -3,97 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ROOT ACCESS | SYSTEM INITIALIZING</title>
+    <title>NORTH WEST TAROT</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
 
         :root {
-            --cyan: #00d4ff;
-            --void: #050a0f;
+            --deep-purple: #1a0a2e;
+            --gold: #d4af37;
+            --soft-white: #f4e4bc;
         }
 
         body {
             margin: 0;
             padding: 0;
-            background-color: #000;
-            color: #fff;
-            font-family: 'Share Tech Mono', monospace;
+            background: radial-gradient(circle at center, var(--deep-purple) 0%, #000 100%);
+            color: var(--soft-white);
+            font-family: 'Cinzel', serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             overflow: hidden;
-            text-transform: uppercase;
         }
 
         .container {
             text-align: center;
-            border: 1px solid var(--cyan);
             padding: 40px;
-            background: rgba(5, 10, 15, 0.9);
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
             position: relative;
         }
 
         h1 {
-            font-size: 2.5rem;
+            font-size: 3.5rem;
             margin: 0;
-            letter-spacing: 5px;
-            color: var(--cyan);
-            text-shadow: 0 0 10px var(--cyan);
+            letter-spacing: 8px;
+            color: var(--gold);
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+            animation: ethereal-glow 4s ease-in-out infinite;
         }
 
         p {
-            margin-top: 20px;
-            letter-spacing: 2px;
-            opacity: 0.8;
+            margin-top: 15px;
+            letter-spacing: 4px;
+            font-size: 1rem;
+            color: var(--soft-white);
+            opacity: 0.6;
+            text-transform: uppercase;
         }
 
-        .loader {
-            margin: 30px auto 0;
-            width: 200px;
+        .divider {
+            width: 80px;
             height: 2px;
-            background: rgba(255, 255, 255, 0.1);
+            background: var(--gold);
+            margin: 20px auto;
             position: relative;
         }
 
-        .loader::after {
-            content: '';
+        /* Small diamond in center of divider */
+        .divider::after {
+            content: '◆';
             position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 30%;
-            background: var(--cyan);
-            box-shadow: 0 0 10px var(--cyan);
-            animation: load 2s infinite ease-in-out;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--gold);
+            font-size: 0.8rem;
         }
 
-        @keyframes load {
-            0% { left: 0; width: 10%; }
-            50% { width: 40%; }
-            100% { left: 90%; width: 10%; }
+        @keyframes ethereal-glow {
+            0%, 100% { text-shadow: 0 0 15px rgba(212, 175, 55, 0.4); opacity: 0.9; }
+            50% { text-shadow: 0 0 30px rgba(212, 175, 55, 0.8); opacity: 1; }
         }
 
-        .status {
-            font-size: 0.7rem;
-            margin-top: 40px;
-            color: #444;
+        /* Optional: Subtle border corners */
+        .frame {
+            position: fixed;
+            width: 90%;
+            height: 90%;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            pointer-events: none;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>PROJECT GENESIS</h1>
-        <p>System Initializing...</p>
-        
-        <div class="loader"></div>
+    <div class="frame"></div>
 
-        <div class="status">
-            ESTABLISHED CONNECTION: ROOTACCESS.GG<br>
-            DEPLOYMENT PHASE: Q2 2026
-        </div>
+    <div class="container">
+        <h1>NORTH WEST TAROT</h1>
+        <div class="divider"></div>
+        <p>Seek the Unseen</p>
     </div>
 
 </body>
