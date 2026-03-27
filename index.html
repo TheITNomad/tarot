@@ -1,98 +1,1401 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NORTH WEST TAROT</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Northwest Tarot — Ancient Wisdom, Modern Guidance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Raleway:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+--neon-blue: #00cfff;
+--neon-pink: #ff3cac;
+--neon-purple: #b94fff;
+--dark-bg: #04050f;
+--dark-mid: #0a0d1e;
+--glow-blue: 0 0 20px #00cfff88, 0 0 60px #00cfff44;
+--glow-pink: 0 0 20px #ff3cac88, 0 0 60px #ff3cac44;
+--glow-purple: 0 0 20px #b94fff88, 0 0 60px #b94fff44;
+}
 
-        :root {
-            --deep-purple: #1a0a2e;
-            --gold: #d4af37;
-            --soft-white: #f4e4bc;
-        }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
-        body {
-            margin: 0;
-            padding: 0;
-            background: radial-gradient(circle at center, var(--deep-purple) 0%, #000 100%);
-            color: var(--soft-white);
-            font-family: 'Cinzel', serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden;
-        }
+body {
+background: var(--dark-bg);
+color: #e8e0ff;
+font-family: 'Raleway', sans-serif;
+font-weight: 300;
+overflow-x: hidden;
+-webkit-font-smoothing: antialiased;
+}
 
-        .container {
-            text-align: center;
-            padding: 40px;
-            position: relative;
-        }
+/* ── PARTICLE CANVAS ── */
+#particle-canvas {
+position: fixed;
+top: 0; left: 0;
+width: 100%; height: 100%;
+pointer-events: none;
+z-index: 0;
+}
 
-        h1 {
-            font-size: 3.5rem;
-            margin: 0;
-            letter-spacing: 8px;
-            color: var(--gold);
-            text-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
-            animation: ethereal-glow 4s ease-in-out infinite;
-        }
+/* ══════════════════════════════
+NAVBAR — mobile-first
+══════════════════════════════ */
+nav {
+position: fixed;
+top: 0; width: 100%;
+z-index: 200;
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 14px 20px;
+background: #04050fee;
+backdrop-filter: blur(8px);
+-webkit-backdrop-filter: blur(8px);
+border-bottom: 1px solid #1a0a2a44;
+}
 
-        p {
-            margin-top: 15px;
-            letter-spacing: 4px;
-            font-size: 1rem;
-            color: var(--soft-white);
-            opacity: 0.6;
-            text-transform: uppercase;
-        }
+.nav-logo {
+font-family: 'Cinzel Decorative', serif;
+font-size: 0.85rem;
+letter-spacing: 2px;
+background: linear-gradient(135deg, var(--neon-blue), var(--neon-pink));
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+flex-shrink: 0;
+}
 
-        .divider {
-            width: 80px;
-            height: 2px;
-            background: var(--gold);
-            margin: 20px auto;
-            position: relative;
-        }
+/* Hamburger button */
+.nav-toggle {
+display: flex;
+flex-direction: column;
+justify-content: center;
+gap: 5px;
+width: 36px;
+height: 36px;
+background: none;
+border: none;
+cursor: pointer;
+padding: 4px;
+z-index: 210;
+flex-shrink: 0;
+}
 
-        /* Small diamond in center of divider */
-        .divider::after {
-            content: '◆';
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: var(--gold);
-            font-size: 0.8rem;
-        }
+.nav-toggle span {
+display: block;
+width: 100%;
+height: 1.5px;
+background: var(--neon-pink);
+border-radius: 2px;
+transition: transform 0.35s ease, opacity 0.35s ease, background 0.3s;
+transform-origin: center;
+}
 
-        @keyframes ethereal-glow {
-            0%, 100% { text-shadow: 0 0 15px rgba(212, 175, 55, 0.4); opacity: 0.9; }
-            50% { text-shadow: 0 0 30px rgba(212, 175, 55, 0.8); opacity: 1; }
-        }
+.nav-toggle.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
-        /* Optional: Subtle border corners */
-        .frame {
-            position: fixed;
-            width: 90%;
-            height: 90%;
-            border: 1px solid rgba(212, 175, 55, 0.1);
-            pointer-events: none;
-        }
-    </style>
+/* Mobile drawer */
+.nav-links {
+position: fixed;
+top: 0; right: 0;
+width: min(280px, 80vw);
+height: 100dvh;
+background: #06040f;
+border-left: 1px solid #2a0a3a;
+box-shadow: -10px 0 40px #b94fff22;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: flex-start;
+gap: 0;
+list-style: none;
+padding: 40px 32px;
+transform: translateX(100%);
+transition: transform 0.4s cubic-bezier(0.77,0,0.175,1);
+z-index: 205;
+}
+
+.nav-links.open { transform: translateX(0); }
+
+.nav-links li { width: 100%; }
+
+.nav-links a {
+display: block;
+color: #c0b0e0;
+text-decoration: none;
+font-family: 'Cinzel', serif;
+font-size: 1rem;
+letter-spacing: 3px;
+text-transform: uppercase;
+padding: 16px 0;
+border-bottom: 1px solid #1a0a2a;
+transition: color 0.3s;
+}
+
+.nav-links a:hover, .nav-links a:focus { color: var(--neon-blue); }
+
+/* Nav overlay */
+.nav-overlay {
+display: none;
+position: fixed;
+inset: 0;
+background: #000000aa;
+z-index: 195;
+}
+.nav-overlay.open { display: block; }
+
+/* ══════════════════════════════
+HERO — mobile first
+══════════════════════════════ */
+#hero {
+position: relative;
+min-height: 100dvh;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+text-align: center;
+overflow: hidden;
+z-index: 1;
+padding: 100px 20px 80px;
+}
+
+.hero-bg-ring {
+position: absolute;
+width: min(340px, 90vw);
+height: min(340px, 90vw);
+border-radius: 50%;
+background: radial-gradient(ellipse at center, #0d1a3a 40%, #04050f 100%);
+box-shadow: 0 0 60px #ff3cac66, inset 0 0 60px #00cfff22;
+animation: ring-pulse 4s ease-in-out infinite;
+}
+
+.hero-bg-ring::before {
+content: '';
+position: absolute;
+inset: -4px;
+border-radius: 50%;
+background: conic-gradient(from 0deg, var(--neon-pink), var(--neon-blue), var(--neon-purple), var(--neon-pink));
+z-index: -1;
+animation: spin 8s linear infinite;
+mask: radial-gradient(farthest-side, transparent calc(100% - 6px), white calc(100% - 6px));
+-webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 6px), white calc(100% - 6px));
+}
+
+@keyframes ring-pulse {
+0%, 100% { box-shadow: 0 0 60px #ff3cac66, inset 0 0 60px #00cfff22; }
+50%       { box-shadow: 0 0 100px #ff3cacaa, inset 0 0 100px #00cfff44; }
+}
+@keyframes spin {
+from { transform: rotate(0deg); }
+to   { transform: rotate(360deg); }
+}
+
+.hero-trees {
+position: absolute;
+bottom: 0;
+width: min(340px, 90vw);
+height: min(340px, 90vw);
+border-radius: 50%;
+overflow: hidden;
+opacity: 0.18;
+}
+.hero-trees svg { position: absolute; bottom: 0; width: 100%; }
+
+.hero-content { position: relative; z-index: 2; width: 100%; }
+
+.hero-eyebrow {
+font-family: 'Cinzel', serif;
+font-size: 0.58rem;
+letter-spacing: 4px;
+text-transform: uppercase;
+color: var(--neon-pink);
+text-shadow: var(--glow-pink);
+margin-bottom: 20px;
+animation: fadeUp 1s ease both;
+}
+
+.hero-title {
+font-family: 'Cinzel Decorative', serif;
+font-size: clamp(2.2rem, 11vw, 6rem);
+font-weight: 900;
+line-height: 1.05;
+margin-bottom: 14px;
+animation: fadeUp 1s 0.2s ease both;
+}
+
+.hero-title .line1 {
+background: linear-gradient(135deg, #ffffff, var(--neon-blue));
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+filter: drop-shadow(0 0 30px #00cfff99);
+}
+.hero-title .line2 {
+background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+filter: drop-shadow(0 0 30px #ff3cac99);
+}
+
+.hero-sub {
+font-size: 0.88rem;
+letter-spacing: 1.5px;
+color: #c0b8e8;
+margin-bottom: 10px;
+animation: fadeUp 1s 0.4s ease both;
+font-style: italic;
+padding: 0 16px;
+}
+
+.hero-years {
+font-family: 'Cinzel', serif;
+font-size: 0.72rem;
+letter-spacing: 3px;
+color: var(--neon-blue);
+text-shadow: var(--glow-blue);
+margin-bottom: 36px;
+animation: fadeUp 1s 0.5s ease both;
+}
+
+.hero-cta-group {
+display: flex;
+flex-direction: column;
+gap: 14px;
+align-items: center;
+animation: fadeUp 1s 0.7s ease both;
+padding: 0 24px;
+}
+
+.btn-primary, .btn-secondary {
+width: 100%;
+max-width: 300px;
+text-align: center;
+padding: 16px 24px;
+border-radius: 50px;
+font-family: 'Cinzel', serif;
+font-size: 0.78rem;
+letter-spacing: 2.5px;
+text-transform: uppercase;
+text-decoration: none;
+display: block;
+transition: transform 0.3s, box-shadow 0.3s;
+-webkit-tap-highlight-color: transparent;
+}
+
+.btn-primary {
+background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
+border: none;
+color: #fff;
+box-shadow: 0 0 30px #ff3cac66;
+cursor: pointer;
+}
+.btn-primary:active { transform: scale(0.97); }
+
+.btn-secondary {
+background: transparent;
+border: 1.5px solid var(--neon-blue);
+color: var(--neon-blue);
+box-shadow: var(--glow-blue);
+cursor: pointer;
+}
+.btn-secondary:active { transform: scale(0.97); }
+
+.scroll-hint {
+position: absolute;
+bottom: 28px;
+left: 50%;
+transform: translateX(-50%);
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 6px;
+animation: bounce 2s infinite;
+opacity: 0.4;
+}
+.scroll-hint span { font-size: 0.55rem; letter-spacing: 3px; text-transform: uppercase; color: var(--neon-purple); }
+.scroll-hint svg { stroke: var(--neon-purple); }
+
+@keyframes bounce {
+0%, 100% { transform: translateX(-50%) translateY(0); }
+50%       { transform: translateX(-50%) translateY(8px); }
+}
+@keyframes fadeUp {
+from { opacity: 0; transform: translateY(30px); }
+to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Floating cards — hidden mobile, shown tablet+ */
+.floating-cards { position: absolute; inset: 0; pointer-events: none; z-index: 1; display: none; }
+
+.tarot-card {
+position: absolute;
+width: 70px; height: 120px;
+border-radius: 8px;
+background: linear-gradient(135deg, #0f1640, #1a0a2e);
+border: 1px solid var(--neon-purple);
+box-shadow: 0 0 20px #b94fff44;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 2rem;
+opacity: 0.7;
+animation: float-card ease-in-out infinite;
+}
+.tarot-card:nth-child(1) { left: 5%;  top: 20%; animation-duration: 9s;  animation-delay: 0s; }
+.tarot-card:nth-child(2) { left: 10%; top: 55%; animation-duration: 11s; animation-delay: -3s; }
+.tarot-card:nth-child(3) { right: 6%; top: 15%; animation-duration: 10s; animation-delay: -1s; }
+.tarot-card:nth-child(4) { right:12%; top: 58%; animation-duration: 13s; animation-delay: -6s; }
+.tarot-card:nth-child(5) { left: 22%; bottom: 8%;  animation-duration: 8s;  animation-delay: -2s; }
+.tarot-card:nth-child(6) { right:22%; bottom: 10%; animation-duration: 12s; animation-delay: -4s; }
+@keyframes float-card {
+0%,100% { transform: translateY(0); }
+50%     { transform: translateY(-20px); }
+}
+
+/* ══════════════════════════════
+SECTIONS — mobile-first
+══════════════════════════════ */
+section {
+position: relative;
+z-index: 1;
+padding: 64px 20px;
+}
+
+.section-inner { max-width: 1100px; margin: 0 auto; }
+
+.section-label {
+font-family: 'Cinzel', serif;
+font-size: 0.58rem;
+letter-spacing: 5px;
+text-transform: uppercase;
+color: var(--neon-pink);
+text-shadow: var(--glow-pink);
+margin-bottom: 14px;
+display: block;
+text-align: center;
+}
+
+.section-title {
+font-family: 'Cinzel Decorative', serif;
+font-size: clamp(1.4rem, 6vw, 3rem);
+text-align: center;
+margin-bottom: 44px;
+background: linear-gradient(135deg, #ffffff 30%, var(--neon-blue));
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+filter: drop-shadow(0 0 20px #00cfff55);
+line-height: 1.2;
+}
+
+.divider {
+width: 100%;
+height: 1px;
+background: linear-gradient(to right, transparent, var(--neon-purple), var(--neon-pink), var(--neon-purple), transparent);
+opacity: 0.5;
+}
+
+/* ── ABOUT ── */
+#about { background: linear-gradient(180deg, #04050f 0%, #080b1f 50%, #04050f 100%); }
+
+.about-grid {
+display: flex;
+flex-direction: column;
+gap: 36px;
+align-items: center;
+text-align: center;
+}
+
+.about-orb {
+width: 180px; height: 180px;
+border-radius: 50%;
+background: radial-gradient(ellipse at 35% 35%, #1a2f6e, #0b0d2a);
+border: 2px solid var(--neon-purple);
+box-shadow: var(--glow-purple), inset 0 0 40px #00cfff22;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 4.5rem;
+flex-shrink: 0;
+animation: orb-glow 4s ease-in-out infinite;
+}
+@keyframes orb-glow {
+0%,100% { box-shadow: var(--glow-purple), inset 0 0 40px #00cfff22; }
+50%     { box-shadow: 0 0 60px #b94fffcc, inset 0 0 80px #00cfff44; }
+}
+
+.about-text h3 {
+font-family: 'Cinzel', serif;
+font-size: clamp(1.1rem, 4vw, 1.6rem);
+color: var(--neon-blue);
+text-shadow: var(--glow-blue);
+margin-bottom: 16px;
+}
+.about-text p {
+line-height: 1.9;
+color: #c0b8e8;
+margin-bottom: 14px;
+font-size: 0.95rem;
+text-align: left;
+}
+
+.about-stats {
+display: flex;
+gap: 28px;
+margin-top: 28px;
+justify-content: center;
+flex-wrap: wrap;
+}
+.stat { text-align: center; }
+.stat-number {
+font-family: 'Cinzel Decorative', serif;
+font-size: 2rem;
+background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+filter: drop-shadow(0 0 10px #ff3cac66);
+display: block;
+}
+.stat-label { font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase; color: #807898; }
+
+/* ── READINGS ── */
+#readings { background: linear-gradient(180deg, #04050f, #06081a, #04050f); }
+
+.readings-grid {
+display: grid;
+grid-template-columns: 1fr;
+gap: 20px;
+}
+
+.reading-card {
+background: linear-gradient(135deg, #090d22, #0f0a25);
+border: 1px solid #2a1a4a;
+border-radius: 16px;
+padding: 28px 22px;
+position: relative;
+overflow: hidden;
+transition: transform 0.4s, box-shadow 0.4s, border-color 0.4s;
+-webkit-tap-highlight-color: transparent;
+}
+.reading-card::before {
+content: '';
+position: absolute;
+top: 0; left: 0; right: 0;
+height: 2px;
+background: linear-gradient(90deg, transparent, var(--neon-pink), transparent);
+opacity: 0;
+transition: opacity 0.4s;
+}
+.reading-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px #b94fff33; border-color: var(--neon-purple); }
+.reading-card:hover::before { opacity: 1; }
+
+.card-icon { font-size: 2.2rem; margin-bottom: 12px; display: block; filter: drop-shadow(0 0 10px #ff3cac88); }
+.card-category { font-size: 0.58rem; letter-spacing: 3px; text-transform: uppercase; color: var(--neon-pink); margin-bottom: 8px; display: block; }
+.card-title { font-family: 'Cinzel', serif; font-size: 1.05rem; color: #fff; margin-bottom: 10px; }
+.card-desc { font-size: 0.85rem; color: #9080b0; line-height: 1.8; margin-bottom: 20px; }
+.card-price { font-family: 'Cinzel', serif; font-size: 1.3rem; color: var(--neon-blue); text-shadow: var(--glow-blue); display: block; margin-bottom: 14px; }
+.card-price span { font-size: 0.68rem; color: #605880; letter-spacing: 1px; }
+
+.btn-book {
+display: inline-block;
+padding: 11px 28px;
+background: transparent;
+border: 1px solid var(--neon-purple);
+border-radius: 50px;
+color: var(--neon-purple);
+font-family: 'Cinzel', serif;
+font-size: 0.68rem;
+letter-spacing: 2px;
+text-decoration: none;
+text-transform: uppercase;
+transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+-webkit-tap-highlight-color: transparent;
+}
+.btn-book:active { background: var(--neon-purple); color: #fff; }
+@media (hover:hover) {
+.btn-book:hover { background: var(--neon-purple); color: #fff; box-shadow: var(--glow-purple); }
+}
+
+/* ── CANDLES ── */
+#candles { background: linear-gradient(180deg, #04050f, #08051a); }
+
+.candles-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+.candle-card {
+background: linear-gradient(160deg, #0d0720, #06031a);
+border: 1px solid #1e0e38;
+border-radius: 14px;
+padding: 22px 16px;
+text-align: center;
+transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+-webkit-tap-highlight-color: transparent;
+}
+.candle-card:active { transform: scale(0.98); }
+
+.candle-icon { font-size: 2.4rem; margin-bottom: 10px; display: block; animation: flicker 3s ease-in-out infinite; }
+@keyframes flicker {
+0%,90%,100% { filter: drop-shadow(0 0 8px #ffb74daa); }
+95%         { filter: drop-shadow(0 0 2px #ffb74d44); }
+}
+.candle-name { font-family: 'Cinzel', serif; font-size: 0.82rem; color: #e0d0ff; margin-bottom: 6px; line-height: 1.3; }
+.candle-desc { font-size: 0.73rem; color: #706088; line-height: 1.6; margin-bottom: 12px; }
+.candle-price { font-family: 'Cinzel', serif; color: var(--neon-pink); font-size: 1rem; text-shadow: var(--glow-pink); }
+
+/* ── PAYMENT ── */
+#payment { background: linear-gradient(180deg, #08051a, #04050f); text-align: center; }
+
+.payment-intro {
+font-size: 0.92rem;
+color: #9080b0;
+max-width: 520px;
+margin: 0 auto 40px;
+line-height: 1.8;
+font-style: italic;
+}
+
+.payment-methods {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 14px;
+max-width: 380px;
+margin: 0 auto 40px;
+}
+
+.payment-methods .pay-btn:last-child {
+grid-column: 1 / -1;
+max-width: 180px;
+justify-self: center;
+}
+
+.pay-btn {
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 8px;
+padding: 20px 12px;
+background: linear-gradient(135deg, #0d0d25, #160a2e);
+border: 1px solid #2a1450;
+border-radius: 16px;
+cursor: pointer;
+text-decoration: none;
+transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+-webkit-tap-highlight-color: transparent;
+}
+.pay-btn:active { transform: scale(0.97); }
+@media (hover:hover) {
+.pay-btn.venmo:hover   { border-color: #3d95ce; box-shadow: 0 8px 30px #3d95ce44; transform: translateY(-4px); }
+.pay-btn.paypal:hover  { border-color: #009cde; box-shadow: 0 8px 30px #009cde44; transform: translateY(-4px); }
+.pay-btn.cashapp:hover { border-color: #00d64f; box-shadow: 0 8px 30px #00d64f44; transform: translateY(-4px); }
+.pay-btn.applepay:hover{ border-color: #aaa;    box-shadow: 0 8px 30px #ffffff33; transform: translateY(-4px); }
+.pay-btn:last-child:hover { border-color: #FFDD00; box-shadow: 0 8px 30px #FFDD0044; transform: translateY(-4px); }
+}
+
+.pay-logo { font-size: 2rem; line-height: 1; }
+.pay-name { font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 2px; color: #9080b0; }
+.pay-handle { font-size: 0.6rem; letter-spacing: 1px; }
+
+/* ── BOOK ── */
+#book { background: linear-gradient(180deg, #04050f, #080b20); text-align: center; }
+
+.book-card {
+max-width: 600px;
+margin: 0 auto;
+background: linear-gradient(135deg, #0d1030, #150b2e);
+border: 1px solid var(--neon-purple);
+border-radius: 20px;
+padding: 40px 24px;
+box-shadow: 0 0 80px #b94fff22;
+position: relative;
+overflow: hidden;
+}
+.book-card::before {
+content: '✦ ✦ ✦';
+position: absolute;
+top: 18px;
+left: 50%;
+transform: translateX(-50%);
+font-size: 0.65rem;
+letter-spacing: 8px;
+color: var(--neon-pink);
+opacity: 0.6;
+white-space: nowrap;
+}
+.book-card p { color: #9080b0; font-size: 0.92rem; line-height: 1.8; margin-bottom: 32px; font-style: italic; }
+
+.email-btn {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: 10px;
+padding: 16px 32px;
+background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
+border-radius: 50px;
+color: #fff;
+font-family: 'Cinzel', serif;
+font-size: 0.78rem;
+letter-spacing: 2px;
+text-decoration: none;
+text-transform: uppercase;
+box-shadow: 0 0 40px #ff3cac55;
+transition: transform 0.3s, box-shadow 0.3s;
+-webkit-tap-highlight-color: transparent;
+width: 100%;
+max-width: 320px;
+}
+.email-btn:active { transform: scale(0.97); }
+@media (hover:hover) {
+.email-btn:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 0 80px #ff3cac88; }
+}
+
+/* ── SOCIAL + SHARE ── */
+#connect { background: linear-gradient(180deg, #080b20, #04050f); text-align: center; }
+
+.social-links { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-bottom: 40px; }
+
+.social-btn {
+width: 52px; height: 52px;
+border-radius: 50%;
+background: linear-gradient(135deg, #0d0d25, #1a0d30);
+border: 1px solid #2a1450;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 1.3rem;
+text-decoration: none;
+transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+cursor: pointer;
+color: inherit;
+-webkit-tap-highlight-color: transparent;
+}
+.social-btn:active { transform: scale(0.93); }
+@media (hover:hover) {
+.social-btn:hover { transform: scale(1.15); border-color: var(--neon-pink); box-shadow: var(--glow-pink); }
+}
+
+.social-placeholder { font-size: 0.65rem; letter-spacing: 2px; color: #403060; text-align: center; text-transform: uppercase; margin-bottom: 40px; font-style: italic; }
+
+.share-label { font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: var(--neon-blue); margin-bottom: 18px; display: block; }
+
+.share-buttons { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+
+.share-btn {
+padding: 12px 20px;
+border-radius: 50px;
+font-size: 0.68rem;
+letter-spacing: 1.5px;
+font-family: 'Cinzel', serif;
+border: 1px solid #2a1450;
+background: transparent;
+color: #9080b0;
+cursor: pointer;
+transition: all 0.3s;
+text-transform: uppercase;
+min-height: 44px;
+-webkit-tap-highlight-color: transparent;
+}
+.share-btn:active { border-color: var(--neon-blue); color: var(--neon-blue); }
+@media (hover:hover) {
+.share-btn:hover { border-color: var(--neon-blue); color: var(--neon-blue); box-shadow: var(--glow-blue); }
+}
+
+/* ── FOOTER ── */
+footer {
+background: #02030a;
+text-align: center;
+padding: 28px 20px;
+border-top: 1px solid #150a2a;
+position: relative;
+z-index: 1;
+}
+footer p { font-size: 0.65rem; letter-spacing: 1.5px; color: #403060; text-transform: uppercase; line-height: 1.8; }
+footer .footer-logo {
+font-family: 'Cinzel Decorative', serif;
+font-size: 0.9rem;
+background: linear-gradient(135deg, var(--neon-blue), var(--neon-pink));
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+display: block;
+margin-bottom: 10px;
+}
+
+/* ── MISC ── */
+.mystic-sep { text-align: center; font-size: 1rem; letter-spacing: 12px; color: var(--neon-purple); opacity: 0.4; margin: 20px 0; }
+
+/* ── SCROLL REVEAL ── */
+.reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ══════════════════════════════
+TABLET  ≥ 600px
+══════════════════════════════ */
+@media (min-width: 600px) {
+section { padding: 80px 32px; }
+.hero-cta-group { flex-direction: row; padding: 0; }
+.btn-primary, .btn-secondary { width: auto; max-width: none; display: inline-block; padding: 15px 36px; }
+.hero-bg-ring { width: 460px; height: 460px; }
+.hero-trees  { width: 460px; height: 460px; }
+.readings-grid { grid-template-columns: repeat(2, 1fr); }
+.candles-grid  { grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.payment-methods { grid-template-columns: repeat(5, 1fr); max-width: 700px; gap: 14px; }
+.payment-methods .pay-btn:last-child { grid-column: auto; max-width: none; justify-self: auto; }
+.about-orb { width: 210px; height: 210px; font-size: 5.5rem; }
+}
+
+/* ══════════════════════════════
+DESKTOP  ≥ 900px
+══════════════════════════════ */
+@media (min-width: 900px) {
+/* swap hamburger for inline links */
+.nav-toggle { display: none; }
+.nav-overlay { display: none !important; }
+
+nav { padding: 18px 48px; background: linear-gradient(to bottom, #04050fcc, transparent); border-bottom: none; }
+
+.nav-links {
+position: static;
+width: auto; height: auto;
+background: none;
+border: none;
+box-shadow: none;
+flex-direction: row;
+justify-content: flex-end;
+align-items: center;
+gap: 36px;
+padding: 0;
+transform: none !important;
+transition: none;
+}
+.nav-links li { width: auto; }
+.nav-links a {
+font-family: 'Raleway', sans-serif;
+font-size: 0.72rem;
+letter-spacing: 2.5px;
+padding: 0;
+border-bottom: none;
+color: #b0a8d0;
+}
+
+section { padding: 100px 48px; }
+
+.hero-bg-ring { width: 680px; height: 680px; }
+.hero-trees   { width: 680px; height: 680px; }
+.floating-cards { display: block; }
+
+.about-grid { display: grid; grid-template-columns: 240px 1fr; gap: 60px; text-align: left; }
+.about-grid .about-text { text-align: left; }
+.about-orb { width: 240px; height: 240px; font-size: 6rem; }
+.about-stats { justify-content: flex-start; }
+
+.readings-grid { grid-template-columns: repeat(3, 1fr); }
+.candles-grid  { grid-template-columns: repeat(4, 1fr); }
+.book-card { padding: 60px 48px; }
+}
+</style>
 </head>
 <body>
 
-    <div class="frame"></div>
+<!-- PARTICLE CANVAS -->
+<canvas id="particle-canvas"></canvas>
 
-    <div class="container">
-        <h1>NORTH WEST TAROT</h1>
-        <div class="divider"></div>
-        <p>Seek the Unseen</p>
-    </div>
+<!-- NAV -->
+<div class="nav-overlay" id="navOverlay" onclick="closeNav()"></div>
+<nav>
+<div class="nav-logo">NW Tarot</div>
+<button class="nav-toggle" id="navToggle" aria-label="Open menu" onclick="toggleNav()">
+<span></span><span></span><span></span>
+</button>
+<ul class="nav-links" id="navLinks">
+<li><a href="#about"    onclick="closeNav()">About</a></li>
+<li><a href="#readings" onclick="closeNav()">Readings</a></li>
+<li><a href="#candles"  onclick="closeNav()">Candles</a></li>
+<li><a href="#payment"  onclick="closeNav()">Payment</a></li>
+<li><a href="#book"     onclick="closeNav()">Book</a></li>
+</ul>
+</nav>
 
+<!-- ═══════════ HERO ═══════════ -->
+<section id="hero">
+<canvas id="hero-canvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
+
+<div class="floating-cards">
+<div class="tarot-card">🌙</div>
+<div class="tarot-card">⭐</div>
+<div class="tarot-card">☀️</div>
+<div class="tarot-card">🔮</div>
+<div class="tarot-card">⚡</div>
+<div class="tarot-card">🌊</div>
+</div>
+
+<div class="hero-bg-ring">
+<div class="hero-trees">
+<svg viewBox="0 0 680 400" xmlns="http://www.w3.org/2000/svg" fill="#1a3a5c">
+<polygon points="60,400 90,300 120,400"/>
+<polygon points="75,320 100,220 125,320"/>
+<polygon points="540,400 570,280 600,400"/>
+<polygon points="555,300 580,190 605,300"/>
+<polygon points="580,400 620,290 660,400"/>
+<polygon points="20,400 55,310 90,400"/>
+<polygon points="610,400 640,320 670,400"/>
+</svg>
+</div>
+</div>
+
+<div class="hero-content">
+<div class="hero-eyebrow">✦ Ancient Wisdom · Modern Clarity ✦</div>
+<h1 class="hero-title">
+<span class="line1">NORTHWEST</span><br>
+<span class="line2">TAROT</span>
+</h1>
+<p class="hero-sub">Where the Pacific Mists Meet The Mystic Arts</p>
+<p class="hero-years">35 Years of Spiritual Guidance</p>
+<div class="hero-cta-group">
+<a href="#book" class="btn-primary">Book a Reading</a>
+<a href="#readings" class="btn-secondary">Explore Services</a>
+</div>
+</div>
+<div class="scroll-hint">
+<span>Descend</span>
+<svg width="16" height="20" viewBox="0 0 16 20" fill="none" stroke-width="1.5">
+<path d="M8 2 L8 16 M2 10 L8 18 L14 10"/>
+</svg>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════ ABOUT ═══════════ -->
+<section id="about">
+<div class="section-inner">
+<span class="section-label">The Reader</span>
+<h2 class="section-title">35 Years of Mystic Wisdom</h2>
+<div class="about-grid reveal">
+<div>
+<div class="about-orb">🔮</div>
+</div>
+<div class="about-text">
+<h3>A Gift Honed Over Decades</h3>
+<p>For over 35 years, I have walked the path between worlds — reading the language of cards, stars, runes, and flame for those seeking clarity in love, life, and purpose. My gift was awakened early and has been refined through decades of dedicated practice and thousands of readings.</p>
+<p>Married for nearly 40 years, I understand deeply the threads of relationships — the joy, the complexity, the seasons of love. My readings carry not just mystical insight but the wisdom of lived experience. Whether you seek guidance on love, career, family, or your soul's greater journey, I am here to illuminate the path.</p>
+<p>From the misty forests of the Pacific Northwest, I offer you a sacred space to receive the messages the universe has waiting for you.</p>
+<div class="about-stats">
+<div class="stat">
+<span class="stat-number">35+</span>
+<span class="stat-label">Years Reading</span>
+</div>
+<div class="stat">
+<span class="stat-number">40</span>
+<span class="stat-label">Years of Love</span>
+</div>
+<div class="stat">
+<span class="stat-number">∞</span>
+<span class="stat-label">Souls Guided</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════ READINGS ═══════════ -->
+<section id="readings">
+<div class="section-inner">
+<span class="section-label">Sacred Services</span>
+<h2 class="section-title">Choose Your Reading</h2>
+<div class="readings-grid">
+
+<!-- Tarot -->
+<div class="reading-card reveal">
+<span class="card-icon">🃏</span>
+<span class="card-category">Major &amp; Minor Arcana</span>
+<div class="card-title">Tarot Reading</div>
+<p class="card-desc">Journey through the 78 cards of the tarot — from the Fool's leap to the World's completion. Full spreads and focused pulls for any life question. Both Major Arcana (life themes) and Minor Arcana (daily energies) consulted.</p>
+<span class="card-price">$25 <span></span></span>
+<a href="mailto:your@email.com?subject=Book Tarot Reading" class="btn-book">Book Now</a>
+</div>
+
+<!-- Astrology -->
+<div class="reading-card reveal">
+<span class="card-icon">♑</span>
+<span class="card-category">Celestial Mapping</span>
+<div class="card-title">Astrology Reading</div>
+<p class="card-desc">Your birth chart is a cosmic fingerprint — a map of the sky at the moment you arrived. Explore your sun, moon, and rising signs, planetary aspects, and transits shaping your present path.</p>
+<span class="card-price">$30 <span></span></span>
+<a href="mailto:your@email.com?subject=Book Astrology Reading" class="btn-book">Book Now</a>
+</div>
+
+<!-- Rune Casting -->
+<div class="reading-card reveal">
+<span class="card-icon">ᚱ</span>
+<span class="card-category">Norse Wisdom</span>
+<div class="card-title">Rune Casting</div>
+<p class="card-desc">The ancient Elder Futhark runes carry the wisdom of the Norse world-tree, Yggdrasil. Cast into the cloth of fate, they reveal hidden forces, obstacles, and the gifts awaiting you on your path.</p>
+<span class="card-price">$30 <span></span></span>
+<a href="mailto:your@email.com?subject=Book Rune Casting" class="btn-book">Book Now</a>
+</div>
+
+<!-- Oracle -->
+<div class="reading-card reveal">
+<span class="card-icon">🌸</span>
+<span class="card-category">Intuitive Oracle</span>
+<div class="card-title">Oracle Card Reading</div>
+<p class="card-desc">Oracle decks speak the language of the heart and intuition. Less structured than tarot, these cards flow freely — perfect for spiritual guidance, self-love, and messages from guides and angels.</p>
+<span class="card-price">$35 <span></span></span>
+<a href="mailto:your@email.com?subject=Book Oracle Reading" class="btn-book">Book Now</a>
+</div>
+
+<!-- Vera Sibilla -->
+<div class="reading-card reveal">
+<span class="card-icon">🇮🇹</span>
+<span class="card-category">Italian Cartomancy</span>
+<div class="card-title">Vera Sibilla Reading</div>
+<p class="card-desc">The Vera Sibilla — the "True Sibyl" — is an ancient Italian oracle deck steeped in centuries of Mediterranean mysticism. Vivid story-pictures reveal love matters, social dynamics, and life events with uncanny precision.</p>
+<span class="card-price">$25 <span></span></span>
+<a href="mailto:your@email.com?subject=Book Vera Sibilla Reading" class="btn-book">Book Now</a>
+</div>
+
+<!-- Cartomancy -->
+<div class="reading-card reveal">
+<span class="card-icon">♠️</span>
+<span class="card-category">Playing Card Divination</span>
+<div class="card-title">Cartomancy Reading</div>
+<p class="card-desc">Cartomancy — reading with a standard deck of playing cards — is one of the oldest and most intimate forms of divination. Spades, Hearts, Diamonds, Clubs: each suit and each number carries deep meaning about your world.</p>
+<span class="card-price">$35 <span></span></span>
+<a href="mailto:your@email.com?subject=Book Cartomancy Reading" class="btn-book">Book Now</a>
+</div>
+
+<!-- Relationship -->
+<div class="reading-card reveal">
+<span class="card-icon">💕</span>
+<span class="card-category">Love &amp; Relationship</span>
+<div class="card-title">Love &amp; Relationship Spread</div>
+<p class="card-desc">A deep-dive reading for the heart — romantic compatibility, relationship dynamics, past wounds, future potential, and the energy between you and another soul. Combined tarot and oracle for full clarity.</p>
+<span class="card-price">$40 <span></span></span>
+<a href="mailto:your@email.com?subject=Book Relationship Reading" class="btn-book">Book Now</a>
+</div>
+
+<!-- Career -->
+<div class="reading-card reveal">
+<span class="card-icon">⚡</span>
+<span class="card-category">Career &amp; Life Path</span>
+<div class="card-title">Career &amp; Purpose Reading</div>
+<p class="card-desc">Feeling called to something more? This reading illuminates your gifts, blocks, and the steps ahead on your professional and life-purpose journey. Ideal for crossroads, new ventures, and major decisions.</p>
+<span class="card-price">$40 <span></span></span>
+<a href="mailto:your@email.com?subject=Book Career Reading" class="btn-book">Book Now</a>
+</div>
+
+<!-- Custom / Rename -->
+<div class="reading-card reveal">
+<span class="card-icon">🌟</span>
+<span class="card-category"><!-- Rename Category --></span>
+<div class="card-title">Life Path</div>
+<p class="card-desc"><!-- Rename and describe this service. Ideal for a signature offering, package deal, or specialty reading you'd like to feature. Customize to your practice. --></p>
+<span class="card-price">$40 <span></span></span>
+<a href="mailto:your@email.com?subject=Book Special Reading" class="btn-book">Book Now</a>
+</div>
+
+</div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════ CANDLES ═══════════ -->
+<section id="candles">
+<div class="section-inner">
+<span class="section-label">Sacred Flame</span>
+<h2 class="section-title">Candle Services</h2>
+<p style="text-align:center;color:#807898;max-width:580px;margin:0 auto 60px;font-size:0.95rem;line-height:1.8;font-style:italic;">Candle magic is one of the oldest forms of spell-work — channeling intention through flame, herbs, oils, and prayer. Each candle is hand-dressed, blessed, and burned with your specific intention.</p>
+<div class="candles-grid">
+
+<div class="candle-card reveal">
+<span class="candle-icon">🕯️</span>
+<div class="candle-name">Reconciliation Candle</div>
+<p class="candle-desc">Dressed with rose oil and herbs of Venus. Burned to draw love, deepen bonds, or open the heart to new connection.</p>
+<span class="candle-price">$15</span>
+<br>
+<br>
+<a href="mailto:your@email.com?subject=Reconciliation Candle" class="btn-book">Book Now</a>
+</div>
+
+
+<div class="candle-card reveal">
+<span class="candle-icon">🕯️</span>
+<div class="candle-name">Love Protection Candle</div>
+<p class="candle-desc">Dressed with protective herbs and black salt. Creates a shield of spiritual protection around you and your home.</p>
+<span class="candle-price">$15</span>
+
+<br>
+<br>
+<a href="mailto:your@email.com?subject=Love & Protection Candle" class="btn-book">Book Now</a>
+
+</div>
+
+<div class="candle-card reveal">
+<span class="candle-icon">🕯️</span>
+<div class="candle-name">Abundance &amp; Prosperity</div>
+<p class="candle-desc">Green candle dressed with cinnamon and citrine chips. Opens pathways to financial flow and material blessing.</p>
+<span class="candle-price">$15</span>
+
+
+<br>
+<br>
+<a href="mailto:your@email.com?subject=Abundance" class="btn-book">Book Now</a>
+
+
+</div>
+
+<div class="candle-card reveal">
+<span class="candle-icon">🕯️</span>
+<div class="candle-name">Communication Candle</div>
+<p class="candle-desc">Burned to dispel confusion, reveal hidden truths, and bring mental clarity to complex situations.</p>
+<span class="candle-price">$15</span>
+
+<br>
+<br>
+<a href="mailto:your@email.com?subject=Communication" class="btn-book">Book Now</a>
+
+
+</div>
+
+<div class="candle-card reveal">
+<span class="candle-icon">🕯️</span>
+<div class="candle-name">3rd Party Removal</div>
+<p class="candle-desc">Blue candle worked with healing herbs and prayer for physical, emotional, or spiritual restoration.</p>
+<span class="candle-price">$15</span>
+
+<br>
+<br>
+<a href="mailto:your@email.com?subject=3rd Party Removal" class="btn-book">Book Now</a>
+</div>
+
+<!-- Rename slot -->
+<div class="candle-card reveal">
+<span class="candle-icon">🕯️</span>
+<div class="candle-name">Healing Candle</div>
+<p class="candle-desc">Healing candle for emotional healing</p>
+<span class="candle-price">$15</span>
+
+<br>
+<br>
+<a href="mailto:your@email.com?subject=Healing Candle" class="btn-book">Book Now</a>
+
+</div>
+
+<!-- Rename slot 2 -->
+<div class="candle-card reveal">
+<span class="candle-icon">🕯️</span>
+<div class="candle-name">Blockage Removal</div>
+<p class="candle-desc">This is to remove any blockages that is preventing the relationship from moving forward</p>
+<span class="candle-price">$15</span>
+
+<br>
+<br>
+<a href="mailto:your@email.com?subject=Bloackage Removal Candle" class="btn-book">Book Now</a>
+
+</div>
+
+<!-- Rename slot 3 -->
+<div class="candle-card reveal">
+<span class="candle-icon">🕯️</span>
+<div class="candle-name">Cord Cutting</div>
+<p class="candle-desc">This is to sever any energy ties to help you get over someone</p>
+<span class="candle-price">$15</span>
+
+<br>
+<br>
+<a href="mailto:your@email.com?subject=Cord Cutting" class="btn-book">Book Now</a>
+
+</div>
+
+
+
+
+</div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════ PAYMENT ═══════════ -->
+<section id="payment">
+<div class="section-inner">
+<span class="section-label">Easy Payment</span>
+<h2 class="section-title">How to Pay</h2>
+<p class="payment-intro">Payment is collected before or at the time of your reading. All methods below are accepted. Reach out to confirm your preferred method when booking.</p>
+<div class="payment-methods">
+<a href="https://venmo.com/tarotbygenesis" target="_blank" class="pay-btn venmo">
+<span class="pay-logo">💙</span>
+<span class="pay-name">Venmo</span>
+<span class="pay-handle" style="color:#3d95ce;">@tarotbygenesis</span>
+</a>
+<a href="https://paypal.me/tarotbygenesis" target="_blank" class="pay-btn paypal">
+<span class="pay-logo">🅿️</span>
+<span class="pay-name">PayPal</span>
+<span class="pay-handle" style="color:#009cde;">tarotbygenesis</span>
+</a>
+<a href="https://cash.app/$tarotbygenesis" target="_blank" class="pay-btn cashapp">
+<span class="pay-logo">💚</span>
+<span class="pay-name">Cash App</span>
+<span class="pay-handle" style="color:#00d64f;">$tarotbygenesis</span>
+</a>
+<div class="pay-btn applepay">
+<span class="pay-logo">🍎</span>
+<span class="pay-name">Apple Pay</span>
+<span class="pay-handle" style="color:#aaa;">tarotbygenesis@icloud.com</span>
+</div>
+<a href="https://buymeacoffee.com/tarotbygenesis" target="_blank" class="pay-btn" style="border-color:#2a1450;">
+<span class="pay-logo">☕</span>
+<span class="pay-name">Buy Me a Coffee</span>
+<span class="pay-handle" style="color:#FFDD00;">tarotbygenesis</span>
+</a>
+</div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════ BOOK ═══════════ -->
+<section id="book">
+<div class="section-inner">
+<span class="section-label">Begin Your Journey</span>
+<h2 class="section-title">Book a Reading</h2>
+<div class="book-card reveal">
+<p>The cards are waiting. Your guides are ready. Send an email to schedule your session — include your name, the type of reading you're drawn to, and any questions or areas you'd like to explore. Readings are available by appointment.</p>
+<a href="mailto:your@email.com?subject=I'd like to book a reading with Northwest Tarot" class="email-btn">
+<span>✉</span> Book Your Reading
+</a>
+</div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════ CONNECT ═══════════ -->
+<section id="connect">
+<div class="section-inner">
+<span class="section-label">Follow the Journey</span>
+<h2 class="section-title">Connect With Us</h2>
+
+<p class="social-placeholder">← Add your social media links below →</p>
+
+<div class="social-links">
+<!-- Replace # with your actual social media URLs -->
+<a href="https://www.instagram.com/northwesttarot" class="social-btn" title="Instagram">📸</a>
+<a href="https://www.tiktok.com/@northwesttarot" class="social-btn" title="TikTok">🎵</a>
+<a href="https://www.youtube.com/@northwesttarot" class="social-btn" title="YouTube">▶️</a>
+</div>
+
+<div class="mystic-sep">✦ ✦ ✦</div>
+
+<span class="share-label">Share the Magic</span>
+<div class="share-buttons">
+<button class="share-btn" onclick="shareToFacebook()">Share on Facebook</button>
+<button class="share-btn" onclick="shareToTwitter()">Share on X</button>
+<button class="share-btn" onclick="copyLink()">Copy Link</button>
+<button class="share-btn" onclick="shareNative()">More Options</button>
+</div>
+</div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+<span class="footer-logo">Northwest Tarot</span>
+<p>© 2024 Northwest Tarot · All Rights Reserved · Readings are for entertainment &amp; spiritual guidance</p>
+</footer>
+
+<!-- ═══════════ SCRIPTS ═══════════ -->
+<script>
+// ── NAV TOGGLE ──
+function toggleNav() {
+const toggle = document.getElementById('navToggle');
+const links  = document.getElementById('navLinks');
+const overlay= document.getElementById('navOverlay');
+const open   = links.classList.toggle('open');
+toggle.classList.toggle('open', open);
+overlay.classList.toggle('open', open);
+document.body.style.overflow = open ? 'hidden' : '';
+}
+function closeNav() {
+document.getElementById('navToggle').classList.remove('open');
+document.getElementById('navLinks').classList.remove('open');
+document.getElementById('navOverlay').classList.remove('open');
+document.body.style.overflow = '';
+}
+
+// ── PARTICLE SYSTEM ──
+(function() {
+const canvas = document.getElementById('particle-canvas');
+const ctx = canvas.getContext('2d');
+let W = canvas.width = window.innerWidth;
+let H = canvas.height = window.innerHeight;
+let mouse = { x: W/2, y: H/2 };
+
+window.addEventListener('resize', () => {
+W = canvas.width = window.innerWidth;
+H = canvas.height = window.innerHeight;
+});
+
+document.addEventListener('mousemove', e => {
+mouse.x = e.clientX;
+mouse.y = e.clientY;
+});
+
+const COLORS = ['#00cfff', '#ff3cac', '#b94fff', '#ffffff', '#7b3fff'];
+const STAR_CHARS = ['✦', '✧', '·', '⋆', '★', '✫', '*'];
+
+class Particle {
+constructor() { this.reset(); }
+reset() {
+this.x = Math.random() * W;
+this.y = Math.random() * H;
+this.size = Math.random() * 2 + 0.3;
+this.speedX = (Math.random() - 0.5) * 0.4;
+this.speedY = (Math.random() - 0.5) * 0.4;
+this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
+this.opacity = Math.random() * 0.6 + 0.1;
+this.twinkle = Math.random() * Math.PI * 2;
+this.twinkleSpeed = Math.random() * 0.03 + 0.005;
+this.char = Math.random() > 0.92 ? STAR_CHARS[Math.floor(Math.random() * STAR_CHARS.length)] : null;
+this.fontSize = Math.random() * 10 + 8;
+}
+update() {
+this.x += this.speedX;
+this.y += this.speedY;
+this.twinkle += this.twinkleSpeed;
+if (this.x < -10 || this.x > W+10 || this.y < -10 || this.y > H+10) this.reset();
+}
+draw() {
+const alpha = this.opacity * (0.5 + 0.5 * Math.sin(this.twinkle));
+ctx.save();
+ctx.globalAlpha = alpha;
+if (this.char) {
+ctx.fillStyle = this.color;
+ctx.font = `${this.fontSize}px serif`;
+ctx.fillText(this.char, this.x, this.y);
+} else {
+ctx.beginPath();
+ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+ctx.fillStyle = this.color;
+ctx.shadowColor = this.color;
+ctx.shadowBlur = 6;
+ctx.fill();
+}
+ctx.restore();
+}
+}
+
+// Shooting star
+class ShootingStar {
+constructor() { this.reset(); }
+reset() {
+this.x = Math.random() * W * 0.7;
+this.y = Math.random() * H * 0.4;
+this.len = Math.random() * 120 + 60;
+this.speed = Math.random() * 8 + 5;
+this.opacity = 1;
+this.angle = Math.PI / 4 + (Math.random() - 0.5) * 0.3;
+this.active = false;
+this.timer = Math.random() * 400 + 200;
+}
+update() {
+this.timer--;
+if (this.timer <= 0 && !this.active) { this.active = true; this.timer = 60; }
+if (this.active) {
+this.x += Math.cos(this.angle) * this.speed;
+this.y += Math.sin(this.angle) * this.speed;
+this.opacity -= 0.025;
+if (this.opacity <= 0) this.reset();
+}
+}
+draw() {
+if (!this.active) return;
+ctx.save();
+ctx.globalAlpha = this.opacity;
+const grad = ctx.createLinearGradient(
+this.x, this.y,
+this.x - Math.cos(this.angle)*this.len, this.y - Math.sin(this.angle)*this.len
+);
+grad.addColorStop(0, '#ffffff');
+grad.addColorStop(1, 'transparent');
+ctx.strokeStyle = grad;
+ctx.lineWidth = 1.5;
+ctx.shadowColor = '#00cfff';
+ctx.shadowBlur = 8;
+ctx.beginPath();
+ctx.moveTo(this.x, this.y);
+ctx.lineTo(this.x - Math.cos(this.angle)*this.len, this.y - Math.sin(this.angle)*this.len);
+ctx.stroke();
+ctx.restore();
+}
+}
+
+const isMobile = window.innerWidth < 600;
+const particles = Array.from({length: isMobile ? 80 : 180}, () => new Particle());
+const shooters  = Array.from({length: isMobile ? 2  : 4},   () => new ShootingStar());
+
+function loop() {
+ctx.clearRect(0, 0, W, H);
+particles.forEach(p => { p.update(); p.draw(); });
+shooters.forEach(s => { s.update(); s.draw(); });
+requestAnimationFrame(loop);
+}
+loop();
+})();
+
+// ── SCROLL REVEAL ──
+const reveals = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver(entries => {
+entries.forEach((e, i) => {
+if (e.isIntersecting) {
+setTimeout(() => e.target.classList.add('visible'), i * 80);
+}
+});
+}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+reveals.forEach(r => obs.observe(r));
+
+// ── SHARE FUNCTIONS ──
+function shareToFacebook() {
+window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(window.location.href), '_blank');
+}
+function shareToTwitter() {
+window.open('https://twitter.com/intent/tweet?url=' + encodeURIComponent(window.location.href) + '&text=' + encodeURIComponent('✨ Northwest Tarot — Ancient Wisdom, Modern Guidance. 35 years of mystical readings! 🔮'), '_blank');
+}
+function copyLink() {
+navigator.clipboard.writeText(window.location.href).then(() => {
+alert('✨ Link copied to clipboard!');
+});
+}
+function shareNative() {
+if (navigator.share) {
+navigator.share({
+title: 'Northwest Tarot',
+text: '✨ Tarot, Astrology, Rune Casting & more — 35 years of wisdom!',
+url: window.location.href
+});
+} else {
+copyLink();
+}
+}
+
+// ── FLOATING CARD PARALLAX ──
+document.addEventListener('mousemove', e => {
+const cards = document.querySelectorAll('.tarot-card');
+const cx = (e.clientX / window.innerWidth - 0.5) * 2;
+const cy = (e.clientY / window.innerHeight - 0.5) * 2;
+cards.forEach((card, i) => {
+const depth = (i % 3 + 1) * 8;
+card.style.transform = `translate(${cx * depth}px, ${cy * depth}px) rotate(${(i-2)*8}deg)`;
+});
+});
+</script>
 </body>
 </html>
