@@ -797,6 +797,66 @@ section { padding: 100px 48px; }
 .candles-grid  { grid-template-columns: repeat(4, 1fr); }
 .book-card { padding: 60px 48px; }
 }
+
+
+/* ══════════════════════════════
+   2026 SERVICE MENU UPGRADE
+   ══════════════════════════════ */
+.service-intro {
+  max-width: 760px; margin: -18px auto 42px; text-align: center;
+  color: #a89bc4; line-height: 1.9; font-size: .95rem;
+}
+.service-tier { margin: 0 auto 58px; }
+.tier-head {
+  max-width: 860px; margin: 0 auto 24px; padding: 24px 22px;
+  background: linear-gradient(135deg,#0d1030dd,#160a2edd);
+  border: 1px solid #44206f; border-radius: 18px; text-align:center;
+  box-shadow: 0 12px 50px #b94fff18;
+}
+.tier-kicker { display:block; color:var(--neon-pink); font-size:.58rem; letter-spacing:4px; text-transform:uppercase; margin-bottom:7px; }
+.tier-head h3 { font-family:'Cinzel Decorative',serif; font-size:clamp(1.15rem,4vw,1.9rem); color:#fff; margin-bottom:8px; }
+.tier-price { display:inline-block; font-family:'Cinzel',serif; font-size:1.25rem; color:var(--neon-blue); text-shadow:var(--glow-blue); margin-bottom:8px; }
+.tier-head p { color:#988ab6; line-height:1.8; font-size:.88rem; }
+.readings-grid.compact { grid-template-columns:1fr; }
+.reading-card.featured { border-color:#63308d; box-shadow:inset 0 0 50px #b94fff09; }
+.card-meta { display:block; color:#6f6488; font-size:.69rem; line-height:1.5; margin-top:-10px; margin-bottom:17px; }
+
+.voice-panel {
+  max-width:900px; margin: 0 auto 58px; padding:32px 24px; border-radius:22px;
+  background:radial-gradient(circle at 50% 0,#1a1650 0,#0b0920 48%,#070515 100%);
+  border:1px solid var(--neon-blue); box-shadow:0 0 55px #00cfff1f; text-align:center;
+}
+.voice-panel h3 { font-family:'Cinzel Decorative',serif; color:#fff; font-size:clamp(1.3rem,5vw,2rem); margin-bottom:10px; }
+.voice-panel p { color:#a99ac8; line-height:1.85; max-width:680px; margin:0 auto 22px; font-size:.92rem; }
+.voice-prices { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin:18px 0 24px; }
+.voice-price { min-width:150px; padding:15px 20px; border:1px solid #285f7c; border-radius:14px; background:#06121c99; font-family:'Cinzel',serif; color:var(--neon-blue); }
+.action-row { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+.action-row .btn-primary,.action-row .btn-secondary { width:auto; min-width:210px; }
+
+.candle-hero-copy {
+  max-width:800px; margin:-18px auto 46px; padding:24px; text-align:center;
+  color:#a99ac8; line-height:1.9; font-size:.93rem; border-radius:18px;
+  border:1px solid #32204e; background:#0a0718aa;
+}
+.candle-hero-copy strong { color:#fff; font-weight:500; }
+.candle-card { display:flex; flex-direction:column; }
+.candle-card .candle-desc { flex:1; }
+.candle-card .btn-book { margin-top:14px; }
+.candle-card.premium { border-color:#8d5c1e; box-shadow:inset 0 0 30px #ffb74d0d; }
+.candle-card.premium .candle-price { color:#ffc766; text-shadow:0 0 20px #ffb74d77; }
+
+.discord-banner {
+  max-width:760px; margin:34px auto 0; padding:24px; border-radius:18px;
+  background:linear-gradient(135deg,#17133f,#271251); border:1px solid #7866ff66;
+  text-align:center; box-shadow:0 15px 50px #7568ff1a;
+}
+.discord-banner h3 { font-family:'Cinzel',serif; color:#fff; margin-bottom:8px; }
+.discord-banner p { color:#9d91bc; line-height:1.7; font-size:.88rem; margin-bottom:16px; }
+.discord-btn { display:inline-block; padding:13px 26px; border-radius:50px; background:#5865F2; color:#fff; text-decoration:none; font-family:'Cinzel',serif; font-size:.72rem; letter-spacing:2px; text-transform:uppercase; box-shadow:0 0 28px #5865F244; }
+
+@media (min-width:600px){ .readings-grid.compact { grid-template-columns:repeat(2,1fr); } }
+@media (min-width:900px){ .readings-grid.compact.specialized { grid-template-columns:repeat(3,1fr); } }
+
 </style>
 </head>
 <body>
@@ -816,7 +876,8 @@ section { padding: 100px 48px; }
 <li><a href="#readings" onclick="closeNav()">Readings</a></li>
 <li><a href="#candles"  onclick="closeNav()">Candles</a></li>
 <li><a href="#payment"  onclick="closeNav()">Payment</a></li>
-<li><a href="#book"     onclick="closeNav()">Book</a></li>
+<li><a href="#book" onclick="closeNav()">Book</a></li>
+<li><a href="https://discord.gg/jXvwfv7jTT" target="_blank" rel="noopener">Discord</a></li>
 </ul>
 </nav>
 
@@ -920,92 +981,63 @@ section { padding: 100px 48px; }
 <!-- ═══════════ READINGS ═══════════ -->
 <section id="readings">
 <div class="section-inner">
-<span class="section-label">Sacred Services</span>
-<h2 class="section-title">Choose Your Reading</h2>
-<div class="readings-grid">
+<span class="section-label">Private Reading Menu</span>
+<h2 class="section-title">Choose the Guidance You Need</h2>
+<p class="service-intro">Private readings are designed to give you space to slow down, absorb the message, and return to your reading whenever you need clarity. Choose the style of reading that best fits what you are moving through right now.</p>
 
-<!-- Tarot -->
-<div class="reading-card reveal">
-<span class="card-icon">🃏</span>
-<span class="card-category">Major &amp; Minor Arcana</span>
-<div class="card-title">Tarot Reading</div>
-<p class="card-desc">Journey through the 78 cards of the tarot — from the Fool's leap to the World's completion. Full spreads and focused pulls for any life question. Both Major Arcana (life themes) and Minor Arcana (daily energies) consulted.</p>
-<span class="card-price">$15 <span></span></span>
-<a href="mailto:tarotbygenesis@gmail.com?subject=Book%20Tarot%20Reading&body=Hello,%20I%20would%20like%20to%20book%20a%20tarot%20reading." class="btn-book">Book Now</a>
+<div class="service-tier">
+  <div class="tier-head reveal">
+    <span class="tier-kicker">Written Reading</span>
+    <h3>Full Readings</h3>
+    <span class="tier-price">$15</span>
+    <p>Written readings delivered through Email or Discord. Ideal when you want insight into a specific area of your life and a detailed look at what is currently unfolding.</p>
+  </div>
+  <div class="readings-grid compact">
+    <div class="reading-card featured reveal">
+      <span class="card-icon">💕</span><span class="card-category">Full Reading</span>
+      <div class="card-title">Love &amp; Relationships</div>
+      <p class="card-desc">Explore your connection, emotions, intentions, communication, relationship dynamics, potential outcomes, and what may be influencing the situation.</p>
+      <span class="card-price">$15</span><span class="card-meta">Delivery: Email or Discord</span>
+      <a href="mailto:tarotbygenesis@gmail.com?subject=Love%20%26%20Relationships%20Reading&body=Hello,%20I%20would%20like%20to%20book%20a%20Love%20%26%20Relationships%20reading." class="btn-book">Book Now</a>
+    </div>
+    <div class="reading-card featured reveal">
+      <span class="card-icon">✨</span><span class="card-category">Full Reading</span>
+      <div class="card-title">Career &amp; Work</div>
+      <p class="card-desc">Gain insight into your current career path, workplace situation, opportunities, challenges, changes, and where your professional energy is heading.</p>
+      <span class="card-price">$15</span><span class="card-meta">Delivery: Email or Discord</span>
+      <a href="mailto:tarotbygenesis@gmail.com?subject=Career%20%26%20Work%20Reading&body=Hello,%20I%20would%20like%20to%20book%20a%20Career%20%26%20Work%20reading." class="btn-book">Book Now</a>
+    </div>
+  </div>
 </div>
 
-<!-- Astrology -->
-<div class="reading-card reveal">
-<span class="card-icon">♑</span>
-<span class="card-category">Celestial Mapping</span>
-<div class="card-title">Astrology Reading</div>
-<p class="card-desc">Your birth chart is a cosmic fingerprint — a map of the sky at the moment you arrived. Explore your sun, moon, and rising signs, planetary aspects, and transits shaping your present path.</p>
-<span class="card-price">$15 <span></span></span>
-<a href="mailto:tarotbygenesis@gmail.com?subject=Book%20Astrology%20Reading&body=Hello,%20I%20would%20like%20to%20book%20an%20astrology%20reading." class="btn-book">Book Now</a>
+<div class="service-tier">
+  <div class="tier-head reveal">
+    <span class="tier-kicker">Deeper Insight</span>
+    <h3>Specialized Readings</h3>
+    <span class="tier-price">$20</span>
+    <p>Written readings delivered through Email or Instagram. Designed to go deeper into personal growth, life direction, and the challenges you may be working through.</p>
+  </div>
+  <div class="readings-grid compact specialized">
+    <div class="reading-card reveal"><span class="card-icon">🧭</span><span class="card-category">Specialized Reading</span><div class="card-title">Life Path Reading</div><p class="card-desc">Explore your current direction, purpose, lessons, opportunities, and the path you may be moving toward.</p><span class="card-price">$20</span><span class="card-meta">Delivery: Email or Instagram</span><a href="mailto:tarotbygenesis@gmail.com?subject=Life%20Path%20Reading&body=Hello,%20I%20would%20like%20to%20book%20a%20Life%20Path%20Reading." class="btn-book">Book Now</a></div>
+    <div class="reading-card reveal"><span class="card-icon">🌱</span><span class="card-category">Specialized Reading</span><div class="card-title">Self-Growth Reading</div><p class="card-desc">Discover what you may need to understand about yourself, what you are growing through, and where you have room to evolve.</p><span class="card-price">$20</span><span class="card-meta">Delivery: Email or Instagram</span><a href="mailto:tarotbygenesis@gmail.com?subject=Self-Growth%20Reading&body=Hello,%20I%20would%20like%20to%20book%20a%20Self-Growth%20Reading." class="btn-book">Book Now</a></div>
+    <div class="reading-card reveal"><span class="card-icon">⛰️</span><span class="card-category">Specialized Reading</span><div class="card-title">Overcoming Challenges</div><p class="card-desc">Look at the obstacles currently standing in your way, what may be contributing to them, and how you can move forward.</p><span class="card-price">$20</span><span class="card-meta">Delivery: Email or Instagram</span><a href="mailto:tarotbygenesis@gmail.com?subject=Overcoming%20Challenges&body=Hello,%20I%20would%20like%20to%20book%20a%20Overcoming%20Challenges." class="btn-book">Book Now</a></div>
+    <div class="reading-card reveal"><span class="card-icon">🌑</span><span class="card-category">Specialized Reading</span><div class="card-title">Shadow Work Reading</div><p class="card-desc">Explore hidden emotions, patterns, fears, behaviors, and deeper parts of yourself that may be affecting your relationships, choices, or personal growth.</p><span class="card-price">$20</span><span class="card-meta">Delivery: Email or Instagram</span><a href="mailto:tarotbygenesis@gmail.com?subject=Shadow%20Work%20Reading&body=Hello,%20I%20would%20like%20to%20book%20a%20Shadow%20Work%20Reading." class="btn-book">Book Now</a></div>
+    <div class="reading-card reveal"><span class="card-icon">💜</span><span class="card-category">Specialized Reading</span><div class="card-title">Healing & Emotional Clarity Reading</div><p class="card-desc">Gain insight into what may be weighing on you emotionally and what you may need to release, understand, or work through.</p><span class="card-price">$20</span><span class="card-meta">Delivery: Email or Instagram</span><a href="mailto:tarotbygenesis@gmail.com?subject=Healing%20%26%20Emotional%20Clarity%20Reading&body=Hello,%20I%20would%20like%20to%20book%20a%20Healing%20%26%20Emotional%20Clarity%20Reading." class="btn-book">Book Now</a></div>
+    <div class="reading-card reveal"><span class="card-icon">🌅</span><span class="card-category">Specialized Reading</span><div class="card-title">New Beginnings Reading</div><p class="card-desc">Perfect when you’re entering a new chapter and want insight into what you’re leaving behind, what you’re stepping into, and what this new phase may bring.</p><span class="card-price">$20</span><span class="card-meta">Delivery: Email or Instagram</span><a href="mailto:tarotbygenesis@gmail.com?subject=New%20Beginnings%20Reading&body=Hello,%20I%20would%20like%20to%20book%20a%20New%20Beginnings%20Reading." class="btn-book">Book Now</a></div>
+    <div class="reading-card reveal"><span class="card-icon">⚖️</span><span class="card-category">Specialized Reading</span><div class="card-title">Decision & Direction Reading</div><p class="card-desc">For when you’re at a crossroads and need clarity around your options, what each path may bring, and what you should consider before moving forward.</p><span class="card-price">$20</span><span class="card-meta">Delivery: Email or Instagram</span><a href="mailto:tarotbygenesis@gmail.com?subject=Decision%20%26%20Direction%20Reading&body=Hello,%20I%20would%20like%20to%20book%20a%20Decision%20%26%20Direction%20Reading." class="btn-book">Book Now</a></div>
+    <div class="reading-card reveal"><span class="card-icon">🔮</span><span class="card-category">Specialized Reading</span><div class="card-title">Personalized Reading</div><p class="card-desc">Have something completely different in mind? Tell me what you’re going through and we can create a reading specifically around your situation.</p><span class="card-price">$20</span><span class="card-meta">Delivery: Email or Instagram</span><a href="mailto:tarotbygenesis@gmail.com?subject=Personalized%20Reading&body=Hello,%20I%20would%20like%20to%20book%20a%20Personalized%20Reading." class="btn-book">Book Now</a></div>
+  </div>
 </div>
 
-<!-- Rune Casting -->
-<div class="reading-card reveal">
-<span class="card-icon">ᚱ</span>
-<span class="card-category">Norse Wisdom</span>
-<div class="card-title">Rune Casting</div>
-<p class="card-desc">The ancient Elder Futhark runes carry the wisdom of the Norse world-tree, Yggdrasil. Cast into the cloth of fate, they reveal hidden forces, obstacles, and the gifts awaiting you on your path.</p>
-<span class="card-price">$15 <span></span></span>
-<a href="mailto:tarotbygenesis@gmail.com?subject=Book%20Rune%20Casting&body=Hello,%20I%20would%20like%20to%20book%20a%20rune%20casting." class="btn-book">Book Now</a>
-</div>
-
-<!-- Oracle -->
-<div class="reading-card reveal">
-<span class="card-icon">🌸</span>
-<span class="card-category">Intuitive Oracle</span>
-<div class="card-title">Oracle Card Reading</div>
-<p class="card-desc">Oracle decks speak the language of the heart and intuition. Less structured than tarot, these cards flow freely — perfect for spiritual guidance, self-love, and messages from guides and angels.</p>
-<span class="card-price">$15 <span></span></span>
-<a href="mailto:tarotbygenesis@gmail.com?subject=Book%20Oracle%20Reading&body=Hello,%20I%20would%20like%20to%20book%20an%20oracle%20reading." class="btn-book">Book Now</a>
-</div>
-
-<!-- Vera Sibilla -->
-<div class="reading-card reveal">
-<span class="card-icon">🇮🇹</span>
-<span class="card-category">Italian Cartomancy</span>
-<div class="card-title">Vera Sibilla Reading</div>
-<p class="card-desc">The Vera Sibilla — the "True Sibyl" — is an ancient Italian oracle deck steeped in centuries of Mediterranean mysticism. Vivid story-pictures reveal love matters, social dynamics, and life events with uncanny precision.</p>
-<span class="card-price">$15 <span></span></span>
-<a href="mailto:tarotbygenesis@gmail.com?subject=Book%20Vera%20Sibilla%20Reading&body=Hello,%20I%20would%20like%20to%20book%20a%20Vera%20Sibilla%20reading." class="btn-book">Book Now</a>
-</div>
-
-<!-- Cartomancy -->
-<div class="reading-card reveal">
-<span class="card-icon">♠️</span>
-<span class="card-category">Playing Card Divination</span>
-<div class="card-title">Cartomancy Reading</div>
-<p class="card-desc">Cartomancy — reading with a standard deck of playing cards — is one of the oldest and most intimate forms of divination. Spades, Hearts, Diamonds, Clubs: each suit and each number carries deep meaning about your world.</p>
-<span class="card-price">$15 <span></span></span>
-<a href="mailto:tarotbygenesis@gmail.com?subject=Book%20Cartomancy%20Reading&body=Hello,%20I%20would%20like%20to%20book%20a%20cartomancy%20reading." class="btn-book">Book Now</a>
-</div>
-
-<!-- Relationship -->
-<div class="reading-card reveal">
-<span class="card-icon">💕</span>
-<span class="card-category">Love &amp; Relationship</span>
-<div class="card-title">Love &amp; Relationship Spread</div>
-<p class="card-desc">A deep-dive reading for the heart — romantic compatibility, relationship dynamics, past wounds, future potential, and the energy between you and another soul. Combined tarot and oracle for full clarity.</p>
-<span class="card-price">$20 <span></span></span>
-<a href="mailto:tarotbygenesis@gmail.com?subject=Book%20Relationship%20Reading&body=Hello,%20I%20would%20like%20to%20book%20a%20relationship%20reading." class="btn-book">Book Now</a>
-</div>
-
-<!-- Career -->
-<div class="reading-card reveal">
-<span class="card-icon">⚡</span>
-<span class="card-category">Career &amp; Life Path</span>
-<div class="card-title">Career &amp; Purpose Reading</div>
-<p class="card-desc">Feeling called to something more? This reading illuminates your gifts, blocks, and the steps ahead on your professional and life-purpose journey. Ideal for crossroads, new ventures, and major decisions.</p>
-<span class="card-price">$20 <span></span></span>
-<a href="mailto:tarotbygenesis@gmail.com?subject=Book%20Career%20Reading&body=Hello,%20I%20would%20like%20to%20book%20a%20career%20reading." class="btn-book">Book Now</a>
-</div>
-
-
-
+<div class="voice-panel reveal">
+  <span class="tier-kicker">One-on-One Conversation</span>
+  <h3>Voice Chat Readings</h3>
+  <p>If you prefer to talk through your reading rather than receive it in writing, voice readings are available through Instagram or Discord. We can explore several questions or stay focused on one particular subject — you choose the direction based on what you need clarity on.</p>
+  <div class="voice-prices"><div class="voice-price">15 Minutes — $25</div><div class="voice-price">30 Minutes — $50</div></div>
+  <div class="action-row">
+    <a href="https://discord.gg/jXvwfv7jTT" target="_blank" rel="noopener" class="btn-primary">Join My Discord</a>
+    <a href="https://www.instagram.com/northwesttarot" target="_blank" rel="noopener" class="btn-secondary">Instagram @northwesttarot</a>
+  </div>
 </div>
 </div>
 </section>
@@ -1015,95 +1047,33 @@ section { padding: 100px 48px; }
 <!-- ═══════════ CANDLES ═══════════ -->
 <section id="candles">
 <div class="section-inner">
-<span class="section-label">Sacred Flame</span>
-<h2 class="section-title">Candle Services</h2>
-<p style="text-align:center;color:#807898;max-width:580px;margin:0 auto 60px;font-size:0.95rem;line-height:1.8;font-style:italic;">Candle magic is one of the oldest forms of spell-work, channeling intention through flame, herbs, oils, and prayer. Each candle is hand-dressed with oils and herbs, blessed and burned with your specific intention. You will recieve a video of me lighting your candle while reciting a spell.</p>
+<span class="section-label">Candle Intention List</span>
+<h2 class="section-title">Private Candle Work</h2>
+<div class="candle-hero-copy reveal"><strong>Personalized candle work, created for your situation and intentions.</strong><br><br>During the ritual, I will light your candle on video while speaking your intention and spell work over it with focused energy and prayer. The private video will then be sent directly to you so you can watch your candle being worked personally for you.<br><br>Choose the candle intention that feels right for your situation. <strong>Each candle is $5 unless otherwise specified.</strong></div>
 <div class="candles-grid">
-
-<div class="candle-card reveal">
-<span class="candle-icon">🕯️</span>
-<div class="candle-name">Reconciliation Candle</div>
-<p class="candle-desc">Dressed with rose oil and herbs of Venus. Burned to draw love, deepen bonds, or open the heart to new connection.</p>
-<span class="candle-price">$5</span>
-<br>
-<br>
-<a href="mailto:tarotbygenesis@gmail.com?subject=Reconciliation%20Candle&body=Hello,%20I%20would%20like%20to%20book%20a%20Reconciliation%20Candle%20session." class="btn-book">Book Now</a>
+<div class="candle-card reveal"><span class="candle-icon">🕯️</span><div class="candle-name">Reconciliation Candle</div><p class="candle-desc">For healing distance, restoring harmony, and opening the path for renewed connection, forgiveness, and understanding.</p><span class="candle-price">$5</span><a href="mailto:tarotbygenesis@gmail.com?subject=Reconciliation%20Candle&body=Hello%2C%20I%20would%20like%20to%20book%20a%20Reconciliation%20Candle." class="btn-book">Book Now</a></div>
+<div class="candle-card reveal"><span class="candle-icon">🕯️</span><div class="candle-name">Commitment Candle</div><p class="candle-desc">For strengthening devotion, loyalty, trust, and creating a deeper sense of dedication within a relationship.</p><span class="candle-price">$5</span><a href="mailto:tarotbygenesis@gmail.com?subject=Commitment%20Candle&body=Hello%2C%20I%20would%20like%20to%20book%20a%20Commitment%20Candle." class="btn-book">Book Now</a></div>
+<div class="candle-card reveal"><span class="candle-icon">🕯️</span><div class="candle-name">Binding Love Energy Candle</div><p class="candle-desc">For nurturing emotional connection, strengthening affection, and deepening the bond between two hearts.</p><span class="candle-price">$5</span><a href="mailto:tarotbygenesis@gmail.com?subject=Binding%20Love%20Energy%20Candle&body=Hello%2C%20I%20would%20like%20to%20book%20a%20Binding%20Love%20Energy%20Candle." class="btn-book">Book Now</a></div>
+<div class="candle-card reveal"><span class="candle-icon">🕯️</span><div class="candle-name">Honeyed Hearts Sweetening Candle</div><p class="candle-desc">Used to soften energy between two people, encourage kindness, affection, communication, and emotional warmth, helping a connection feel more harmonious and receptive.</p><span class="candle-price">$5</span><a href="mailto:tarotbygenesis@gmail.com?subject=Honeyed%20Hearts%20Sweetening%20Candle&body=Hello%2C%20I%20would%20like%20to%20book%20a%20Honeyed%20Hearts%20Sweetening%20Candle." class="btn-book">Book Now</a></div>
+<div class="candle-card reveal"><span class="candle-icon">🕯️</span><div class="candle-name">Love Protection Candle</div><p class="candle-desc">For protecting a relationship, guarding emotional energy, and creating a stronger foundation of love and trust.</p><span class="candle-price">$5</span><a href="mailto:tarotbygenesis@gmail.com?subject=Love%20Protection%20Candle&body=Hello%2C%20I%20would%20like%20to%20book%20a%20Love%20Protection%20Candle." class="btn-book">Book Now</a></div>
+<div class="candle-card reveal"><span class="candle-icon">🕯️</span><div class="candle-name">Third-Party Removal Candle</div><p class="candle-desc">For clearing outside influences, distractions, and energies that may be affecting a connection.</p><span class="candle-price">$5</span><a href="mailto:tarotbygenesis@gmail.com?subject=Third-Party%20Removal%20Candle&body=Hello%2C%20I%20would%20like%20to%20book%20a%20Third-Party%20Removal%20Candle." class="btn-book">Book Now</a></div>
+<div class="candle-card reveal"><span class="candle-icon">🕯️</span><div class="candle-name">Blockage Removal Candle</div><p class="candle-desc">For releasing fears, resistance, emotional barriers, and obstacles that may be preventing progress.</p><span class="candle-price">$5</span><a href="mailto:tarotbygenesis@gmail.com?subject=Blockage%20Removal%20Candle&body=Hello%2C%20I%20would%20like%20to%20book%20a%20Blockage%20Removal%20Candle." class="btn-book">Book Now</a></div>
+<div class="candle-card reveal"><span class="candle-icon">🕯️</span><div class="candle-name">Healing Candle</div><p class="candle-desc">For emotional healing, comfort, peace, and restoring balance after heartbreak, stress, or difficult experiences.</p><span class="candle-price">$5</span><a href="mailto:tarotbygenesis@gmail.com?subject=Healing%20Candle&body=Hello%2C%20I%20would%20like%20to%20book%20a%20Healing%20Candle." class="btn-book">Book Now</a></div>
+<div class="candle-card reveal"><span class="candle-icon">🕯️</span><div class="candle-name">Communication Candle</div><p class="candle-desc">For opening pathways of honest expression, understanding, and helping conversations flow with greater clarity.</p><span class="candle-price">$5</span><a href="mailto:tarotbygenesis@gmail.com?subject=Communication%20Candle&body=Hello%2C%20I%20would%20like%20to%20book%20a%20Communication%20Candle." class="btn-book">Book Now</a></div>
+<div class="candle-card reveal"><span class="candle-icon">🕯️</span><div class="candle-name">Protection Candle</div><p class="candle-desc">For creating a protective energy around you, your space, and your spirit while helping guard against negative energies and unwanted influences.</p><span class="candle-price">$5</span><a href="mailto:tarotbygenesis@gmail.com?subject=Protection%20Candle&body=Hello%2C%20I%20would%20like%20to%20book%20a%20Protection%20Candle." class="btn-book">Book Now</a></div>
+<div class="candle-card reveal"><span class="candle-icon">🕯️</span><div class="candle-name">Cleansing Candle</div><p class="candle-desc">For clearing heavy energy, refreshing your surroundings, and creating a sense of renewal, peace, and balance.</p><span class="candle-price">$5</span><a href="mailto:tarotbygenesis@gmail.com?subject=Cleansing%20Candle&body=Hello%2C%20I%20would%20like%20to%20book%20a%20Cleansing%20Candle." class="btn-book">Book Now</a></div>
+<div class="candle-card reveal premium"><span class="candle-icon">🕯️</span><div class="candle-name">Spell/Hex Removal Candle</div><p class="candle-desc">For releasing unwanted spiritual energy, removing what feels heavy or disruptive, and restoring personal strength and clarity.</p><span class="candle-price">$10</span><a href="mailto:tarotbygenesis@gmail.com?subject=Spell/Hex%20Removal%20Candle&body=Hello%2C%20I%20would%20like%20to%20book%20a%20Spell/Hex%20Removal%20Candle." class="btn-book">Book Now</a></div>
+<div class="candle-card reveal premium"><span class="candle-icon">🕯️</span><div class="candle-name">Cord Cutting</div><p class="candle-desc">Specifically for breaking unhealthy energetic attachments or connections between you and another person, helping release lingering emotional or energetic ties so you can move forward.</p><span class="candle-price">$10</span><a href="mailto:tarotbygenesis@gmail.com?subject=Cord%20Cutting&body=Hello%2C%20I%20would%20like%20to%20book%20a%20Cord%20Cutting." class="btn-book">Book Now</a></div>
+<div class="candle-card reveal"><span class="candle-icon">🕯️</span><div class="candle-name">Weight Loss & Transformation Spell</div><p class="candle-desc">Intended to support motivation, discipline, consistency, and a positive mindset while working toward weight-loss and wellness goals.</p><span class="candle-price">$5</span><a href="mailto:tarotbygenesis@gmail.com?subject=Weight%20Loss%20%26%20Transformation%20Spell&body=Hello%2C%20I%20would%20like%20to%20book%20a%20Weight%20Loss%20%26%20Transformation%20Spell." class="btn-book">Book Now</a></div>
+<div class="candle-card reveal"><span class="candle-icon">🕯️</span><div class="candle-name">Healing & Renewal Candle</div><p class="candle-desc">For supporting emotional restoration, new beginnings, inner peace, and bringing balance back into your life.</p><span class="candle-price">$5</span><a href="mailto:tarotbygenesis@gmail.com?subject=Healing%20%26%20Renewal%20Candle&body=Hello%2C%20I%20would%20like%20to%20book%20a%20Healing%20%26%20Renewal%20Candle." class="btn-book">Book Now</a></div>
+<div class="candle-card reveal"><span class="candle-icon">🕯️</span><div class="candle-name">Intuition & Guidance Candle</div><p class="candle-desc">For strengthening your connection to your inner wisdom, encouraging clarity, and helping you feel guided on your path.</p><span class="candle-price">$5</span><a href="mailto:tarotbygenesis@gmail.com?subject=Intuition%20%26%20Guidance%20Candle&body=Hello%2C%20I%20would%20like%20to%20book%20a%20Intuition%20%26%20Guidance%20Candle." class="btn-book">Book Now</a></div>
+<div class="candle-card reveal"><span class="candle-icon">🕯️</span><div class="candle-name">Prosperity Candle</div><p class="candle-desc">For welcoming abundance, success, opportunities, and positive growth into your life.</p><span class="candle-price">$5</span><a href="mailto:tarotbygenesis@gmail.com?subject=Prosperity%20Candle&body=Hello%2C%20I%20would%20like%20to%20book%20a%20Prosperity%20Candle." class="btn-book">Book Now</a></div>
+<div class="candle-card reveal"><span class="candle-icon">🕯️</span><div class="candle-name">Luck & Opportunity Candle</div><p class="candle-desc">For opening new doors, attracting favorable circumstances, and inviting positive changes.</p><span class="candle-price">$5</span><a href="mailto:tarotbygenesis@gmail.com?subject=Luck%20%26%20Opportunity%20Candle&body=Hello%2C%20I%20would%20like%20to%20book%20a%20Luck%20%26%20Opportunity%20Candle." class="btn-book">Book Now</a></div>
+<div class="candle-card reveal"><span class="candle-icon">🕯️</span><div class="candle-name">Motivation & Success Candle</div><p class="candle-desc">For encouraging confidence, determination, focus, and the energy needed to move toward your goals.</p><span class="candle-price">$5</span><a href="mailto:tarotbygenesis@gmail.com?subject=Motivation%20%26%20Success%20Candle&body=Hello%2C%20I%20would%20like%20to%20book%20a%20Motivation%20%26%20Success%20Candle." class="btn-book">Book Now</a></div>
+<div class="candle-card reveal"><span class="candle-icon">🕯️</span><div class="candle-name">Home Blessing Candle</div><p class="candle-desc">For bringing peaceful energy into your home, creating harmony, and blessing your personal space.</p><span class="candle-price">$5</span><a href="mailto:tarotbygenesis@gmail.com?subject=Home%20Blessing%20Candle&body=Hello%2C%20I%20would%20like%20to%20book%20a%20Home%20Blessing%20Candle." class="btn-book">Book Now</a></div>
+<div class="candle-card reveal"><span class="candle-icon">🕯️</span><div class="candle-name">Shadow Work Candle</div><p class="candle-desc">For self-reflection, releasing old patterns, understanding yourself deeper, and supporting personal transformation.</p><span class="candle-price">$5</span><a href="mailto:tarotbygenesis@gmail.com?subject=Shadow%20Work%20Candle&body=Hello%2C%20I%20would%20like%20to%20book%20a%20Shadow%20Work%20Candle." class="btn-book">Book Now</a></div>
 </div>
-
-
-<div class="candle-card reveal">
-<span class="candle-icon">🕯️</span>
-<div class="candle-name">Love Protection Candle</div>
-<p class="candle-desc">Dressed with protective herbs and black salt. Creates a shield of protection around you and your partner.</p>
-<span class="candle-price">$5</span>
-<br>
-<br>
-<a href="mailto:tarotbygenesis@gmail.com?subject=Love%20%26%20Protection%20Candle&body=Hello,%20I%20would%20like%20to%20book%20a%20Love%20%26%20Protection%20Candle%20session." class="btn-book">Book Now</a>
-</div>
-
-<div class="candle-card reveal">
-<span class="candle-icon">🕯️</span>
-<div class="candle-name">Abundance &amp; Prosperity</div>
-<p class="candle-desc">Green candle dressed with cinnamon and citrine chips. Opens pathways to financial flow and material blessing.</p>
-<span class="candle-price">$5</span>
-<br>
-<br>
-<a href="mailto:tarotbygenesis@gmail.com?subject=Abundance&body=Hello,%20I%20would%20like%20to%20book%20an%20Abundance%20session." class="btn-book">Book Now</a>
-</div>
-
-<div class="candle-card reveal">
-<span class="candle-icon">🕯️</span>
-<div class="candle-name">Communication Candle</div>
-<p class="candle-desc">Burned to dispel confusion, reveal hidden truths, and bring mental clarity to complex situations.</p>
-<span class="candle-price">$5</span>
-<br>
-<br>
-<a href="mailto:tarotbygenesis@gmail.com?subject=Communication&body=Hello,%20I%20would%20like%20to%20book%20a%20Communication%20session." class="btn-book">Book Now</a>
-</div>
-
-<div class="candle-card reveal">
-<span class="candle-icon">🕯️</span>
-<div class="candle-name">3rd Party Removal</div>
-<p class="candle-desc">3rd party removal is spiritual work focused on clearing outside interference that may effect a romantic connection</p>
-<span class="candle-price">$5</span>
-<br>
-<br>
-<a href="mailto:tarotbygenesis@gmail.com?subject=3rd%20Party%20Removal&body=Hello,%20I%20would%20like%20to%20book%20a%203rd%20Party%20Removal%20session." class="btn-book">Book Now</a>
-</div>
-
-<!-- Rename slot -->
-<div class="candle-card reveal">
-<span class="candle-icon">🕯️</span>
-<div class="candle-name">Healing Candle</div>
-<p class="candle-desc">Healing candle for emotional healing</p>
-<span class="candle-price">$5</span>
-<br>
-<br>
-<a href="mailto:tarotbygenesis@gmail.com?subject=Healing%20Candle&body=Hello,%20I%20would%20like%20to%20book%20a%20Healing%20Candle%20session." class="btn-book">Book Now</a>
-</div>
-
-<!-- Rename slot 2 -->
-<div class="candle-card reveal">
-<span class="candle-icon">🕯️</span>
-<div class="candle-name">Blockage Removal</div>
-<p class="candle-desc">This is to remove any blockages that is preventing amy situation from moving forward</p>
-<span class="candle-price">$5</span>
-<br>
-<br>
-<a href="mailto:tarotbygenesis@gmail.com?subject=Blockage%20Removal%20Candle&body=Hello,%20I%20would%20like%20to%20book%20a%20Blockage%20Removal%20Candle%20session." class="btn-book">Book Now</a>
-</div>
-
-<!-- Rename slot 3 -->
-<div class="candle-card reveal">
-<span class="candle-icon">🕯️</span>
-<div class="candle-name">Cord Cutting</div>
-<p class="candle-desc">This is to sever any energy ties to help you get over someone</p>
-<span class="candle-price">$5</span>
-<br>
-<br>
-<a href="mailto:tarotbygenesis@gmail.com?subject=Cord%20Cutting&body=Hello,%20I%20would%20like%20to%20book%20a%20Cord%20Cutting%20session." class="btn-book">Book Now</a>
-</div>
-</div>
+<div class="discord-banner reveal"><h3>Prefer Discord?</h3><p>Join the Northwest Tarot community to connect and arrange a reading or voice chat.</p><a href="https://discord.gg/jXvwfv7jTT" target="_blank" rel="noopener" class="discord-btn">Join Northwest Tarot Discord</a></div>
 </div>
 </section>
 
@@ -1164,13 +1134,14 @@ section { padding: 100px 48px; }
 <span class="section-label">Follow the Journey</span>
 <h2 class="section-title">Connect With Us</h2>
 
-<p class="social-placeholder">← Add your social media links below →</p>
+<p class="social-placeholder">Readings · Community · Live Guidance</p>
 
 <div class="social-links">
 <!-- Replace # with your actual social media URLs -->
 <a href="https://www.instagram.com/northwesttarot" class="social-btn" title="Instagram">📸</a>
 <a href="https://www.tiktok.com/@northwesttarot" class="social-btn" title="TikTok">🎵</a>
 <a href="https://www.youtube.com/@northwesttarot" class="social-btn" title="YouTube">▶️</a>
+<a href="https://discord.gg/jXvwfv7jTT" target="_blank" rel="noopener" class="social-btn" title="Discord">💬</a>
 </div>
 
 <div class="mystic-sep">✦ ✦ ✦</div>
@@ -1188,7 +1159,7 @@ section { padding: 100px 48px; }
 <!-- ═══════════ FOOTER ═══════════ -->
 <footer>
 <span class="footer-logo">Northwest Tarot</span>
-<p>© 2024 Northwest Tarot · All Rights Reserved · Readings are for entertainment &amp; spiritual guidance</p>
+<p>© 2026 Northwest Tarot · All Rights Reserved · Readings are for entertainment &amp; spiritual guidance</p>
 </footer>
 
 <!-- ═══════════ SCRIPTS ═══════════ -->
