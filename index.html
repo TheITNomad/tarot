@@ -857,6 +857,106 @@ section { padding: 100px 48px; }
 @media (min-width:600px){ .readings-grid.compact { grid-template-columns:repeat(2,1fr); } }
 @media (min-width:900px){ .readings-grid.compact.specialized { grid-template-columns:repeat(3,1fr); } }
 
+
+/* ── WHITE TEXT OVERRIDE ── */
+body, body * { color: #ffffff; }
+.hero-title .line1, .hero-title .line2, .nav-logo, .section-title, .stat-number, .footer-logo {
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  -webkit-text-fill-color: #ffffff !important;
+  background-clip: initial !important;
+  color: #ffffff !important;
+}
+/* Keep button text crisp white */
+.btn-primary, .btn-secondary, .btn-book, .email-btn, .share-btn, .social-btn, .pay-btn, .pay-name, .pay-handle {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+
+/* ══════════════════════════════
+   MOBILE-FIRST CENTERED LAYOUT
+   ══════════════════════════════ */
+.hero-content,
+.about-text,
+.service-intro,
+.tier-head,
+.reading-card,
+.candle-hero-copy,
+.candle-card,
+.voice-panel,
+.discord-banner,
+.payment-intro,
+.book-card,
+#connect .section-inner {
+  text-align: center !important;
+}
+
+.about-text p,
+.card-desc,
+.candle-desc,
+.tier-head p,
+.voice-panel p,
+.discord-banner p,
+.book-card p {
+  text-align: center !important;
+}
+
+.about-stats,
+.action-row,
+.social-links,
+.share-buttons {
+  justify-content: center !important;
+}
+
+.reading-card, .candle-card {
+  align-items: center;
+}
+
+.btn-book, .discord-btn, .email-btn {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Payment area: clean centered stack on phones */
+.payment-methods {
+  grid-template-columns: 1fr !important;
+  width: 100%;
+  max-width: 320px !important;
+  margin: 0 auto 40px !important;
+  justify-items: stretch;
+  gap: 14px;
+}
+.payment-methods .pay-btn,
+.payment-methods .pay-btn:last-child {
+  width: 100%;
+  max-width: 320px !important;
+  grid-column: auto !important;
+  justify-self: center !important;
+  text-align: center !important;
+}
+
+/* Remove the empty hero CTA spacing after the two hero buttons were removed */
+.hero-cta-group { display:none !important; }
+
+@media (min-width: 600px) {
+  .payment-methods {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    max-width: 560px !important;
+  }
+  .payment-methods .pay-btn,
+  .payment-methods .pay-btn:last-child { max-width: none !important; }
+}
+
+@media (min-width: 900px) {
+  .payment-methods {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    max-width: 760px !important;
+  }
+  .about-text { text-align:center !important; }
+  .about-stats { justify-content:center !important; }
+}
+
 </style>
 </head>
 <body>
@@ -916,10 +1016,7 @@ section { padding: 100px 48px; }
 </h1>
 <p class="hero-sub">Where the Pacific Mists Meet The Mystic Arts</p>
 <p class="hero-years">35 Years of Spiritual Guidance</p>
-<div class="hero-cta-group">
-<a href="#book" class="btn-primary">Book a Reading</a>
-<a href="#readings" class="btn-secondary">Explore Services</a>
-</div>
+
 </div>
 <div class="scroll-hint">
 <span>Descend</span>
