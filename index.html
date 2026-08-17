@@ -957,6 +957,24 @@ body, body * { color: #ffffff; }
   .about-stats { justify-content:center !important; }
 }
 
+
+/* FINAL GLOBAL TEXT OVERRIDE — ALL PAGE TEXT WHITE */
+html, body, body *, body *::before, body *::after {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+/* Preserve non-text decorative backgrounds/borders while forcing gradient text to white */
+.hero-title .line1, .hero-title .line2, .section-title, .nav-logo, .footer-logo, .stat-number {
+  background: none !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+/* Form controls / buttons / links */
+a, button, input, textarea, select, option, .btn-primary, .btn-secondary, .btn-book, .email-btn, .pay-btn, .social-btn, .share-btn {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
 </style>
 </head>
 <body>
