@@ -122,29 +122,45 @@
 
     .video-shell {
       position: relative;
-      width: 100%;
-      max-width: 960px;
+      width: min(92vw, 460px);
       margin: 0 auto;
       padding: 2px;
-      border-radius: 22px;
+      border-radius: 24px;
       background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple), var(--neon-blue));
       box-shadow: 0 0 34px #b94fff44, 0 24px 80px #000a;
     }
 
     .video-inner {
       position: relative;
+      width: 100%;
+      aspect-ratio: 9 / 16;
       overflow: hidden;
-      border-radius: 20px;
+      border-radius: 22px;
       background: #000;
     }
 
     video {
       display: block;
       width: 100%;
-      height: auto;
-      max-height: 75vh;
+      height: 100%;
       background: #000;
       object-fit: contain;
+    }
+
+    @media (max-width: 520px) {
+      main {
+        width: min(100% - 20px, 1100px);
+        padding-top: 42px;
+      }
+
+      .video-shell {
+        width: min(94vw, 430px);
+        border-radius: 20px;
+      }
+
+      .video-inner {
+        border-radius: 18px;
+      }
     }
 
     .reading-note {
